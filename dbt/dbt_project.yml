@@ -1,0 +1,32 @@
+name: lucca_dbt
+version: '1.0'
+config-version: 2
+
+profile: lucca
+
+# Chemins des dossiers du projet
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Dossier cible pour les fichiers compilés et résultats
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuration des modèles selon le dossier
+models:
+  lucca_dbt:
+    base:
+      +schema: base        # tous les modèles dans models/base iront dans schema base
+      +materialized: table
+    transform:
+      +schema: transform   # tous les modèles dans models/transform iront dans schema transform
+      +materialized: table
+    analytics:
+      +schema: analytics   # tous les modèles dans models/analytics iront dans schema analytics
+      +materialized: table

@@ -1,0 +1,11 @@
+lucca:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5433
+      user: lucca_user
+      password: lucca_pass
+      dbname: lucca_db
+      schema: public  # juste pour la connexion

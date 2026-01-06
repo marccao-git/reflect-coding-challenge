@@ -1,0 +1,30 @@
+[2026-01-04T19:00:05.196+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: lucca_daily_update.fetch_and_insert_users scheduled__2026-01-04T18:50:00+00:00 [queued]>
+[2026-01-04T19:00:05.199+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: lucca_daily_update.fetch_and_insert_users scheduled__2026-01-04T18:50:00+00:00 [queued]>
+[2026-01-04T19:00:05.199+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2026-01-04T19:00:05.203+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_and_insert_users> on 2026-01-04 18:50:00+00:00
+[2026-01-04T19:00:05.205+0000] {standard_task_runner.py:57} INFO - Started process 250 to run task
+[2026-01-04T19:00:05.206+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'lucca_daily_update', 'fetch_and_insert_users', 'scheduled__2026-01-04T18:50:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/lucca_daily_update.py', '--cfg-path', '/tmp/tmpsyaza2me']
+[2026-01-04T19:00:05.206+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask fetch_and_insert_users
+[2026-01-04T19:00:05.226+0000] {task_command.py:415} INFO - Running <TaskInstance: lucca_daily_update.fetch_and_insert_users scheduled__2026-01-04T18:50:00+00:00 [running]> on host 05f6d87225c8
+[2026-01-04T19:00:05.260+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='marc' AIRFLOW_CTX_DAG_ID='lucca_daily_update' AIRFLOW_CTX_TASK_ID='fetch_and_insert_users' AIRFLOW_CTX_EXECUTION_DATE='2026-01-04T18:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-01-04T18:50:00+00:00'
+[2026-01-04T19:00:05.261+0000] {logging_mixin.py:151} INFO - Fetching lucca data from API...
+[2026-01-04T19:00:05.468+0000] {logging_mixin.py:151} INFO - API response received successfully.
+[2026-01-04T19:00:05.474+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/lucca_daily_update.py", line 30, in fetch_and_insert
+    cur.execute(
+psycopg2.errors.UndefinedTable: relation "users" does not exist
+LINE 2:             INSERT INTO users (id, name, mail, employee_numb...
+                                ^
+
+[2026-01-04T19:00:05.478+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=lucca_daily_update, task_id=fetch_and_insert_users, execution_date=20260104T185000, start_date=20260104T190005, end_date=20260104T190005
+[2026-01-04T19:00:05.483+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 2 for task fetch_and_insert_users (relation "users" does not exist
+LINE 2:             INSERT INTO users (id, name, mail, employee_numb...
+                                ^
+; 250)
+[2026-01-04T19:00:05.514+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-01-04T19:00:05.524+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
